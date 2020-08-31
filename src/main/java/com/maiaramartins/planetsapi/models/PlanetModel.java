@@ -3,11 +3,12 @@ package com.maiaramartins.planetsapi.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Objects;
+import javax.validation.constraints.NotBlank;
 
 
 @Document(collection = "planets")
@@ -16,15 +17,23 @@ import java.util.Objects;
 public class PlanetModel {
 
     @Id
-    private long id;
+    private String id;
+
+    @NotBlank
+    @Indexed(unique = true)
     private String name;
+
+    @NotBlank
     private String climate;
+
+    @NotBlank
     private String terrain;
 
     public PlanetModel() {
     }
 
     public PlanetModel(String name, String climate, String terrain) {
+        id = new ObjectId().toString();
         this.name = name;
         this.climate = climate;
         this.terrain = terrain;

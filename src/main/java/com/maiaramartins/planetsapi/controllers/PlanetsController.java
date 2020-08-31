@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/planets")
+@RequestMapping("/v1/planets")
 public class PlanetsController {
 
     @Autowired
     private PlanetBO planetBO;
+
+
 
     @GetMapping()
     public ResponseEntity<List<PlanetModel>> getAll(){
@@ -32,7 +35,14 @@ public class PlanetsController {
 
     }
 
-    @GetMapping("/{id}")
+    @PostMapping()
+    public ResponseEntity<PlanetModel> create(@Valid @RequestBody PlanetModel newPlanet){
+        PlanetModel byName = planetBO.createPlanet(newPlanet);
+        return ResponseEntity.ok(byName);
+
+    }
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<PlanetModel> deleteById(@PathVariable("id") long id){
         return ResponseEntity.ok(planetBO.deleteById(id));
 

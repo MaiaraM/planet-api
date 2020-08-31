@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface PlanetRepository extends MongoRepository<PlanetModel, String>{
 
     PlanetModel findAllByName(String name);
-    PlanetModel findById(long id);
     PlanetModel deleteById(long id);
 
 }
