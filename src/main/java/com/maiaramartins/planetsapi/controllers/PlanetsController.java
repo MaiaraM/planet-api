@@ -3,6 +3,7 @@ package com.maiaramartins.planetsapi.controllers;
 import com.maiaramartins.planetsapi.business.PlanetBO;
 import com.maiaramartins.planetsapi.models.PlanetModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class PlanetsController {
     }
 
     @PostMapping()
-    public ResponseEntity<PlanetModel> create(@Valid @RequestBody PlanetModel newPlanet){
+    public ResponseEntity<PlanetModel> create(@RequestBody PlanetModel newPlanet){
         PlanetModel byName = planetBO.createPlanet(newPlanet);
         return ResponseEntity.ok(byName);
 

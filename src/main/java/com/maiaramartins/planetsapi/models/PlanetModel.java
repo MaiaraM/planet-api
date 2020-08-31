@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Document(collection = "planets")
@@ -19,14 +19,14 @@ public class PlanetModel {
     @Id
     private String id;
 
-    @NotBlank
+    @NotNull
     @Indexed(unique = true)
     private String name;
 
-    @NotBlank
+    @NotNull
     private String climate;
 
-    @NotBlank
+    @NotNull
     private String terrain;
 
     public PlanetModel() {
